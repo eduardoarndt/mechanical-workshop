@@ -5,9 +5,11 @@ class _Person:
         self.numer = numer
         self.mail = mail
 
+
 class Employee(_Person):
     def __init__(self, name, cpf, numer, mail):
         super().__init__(name, cpf, numer, mail)
+
 
 class Customer(_Person):
     def __init__(self, name, cpf, numer, mail, addres, birthDate, gender, civilState, isCustomerActive):
