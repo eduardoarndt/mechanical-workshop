@@ -1,7 +1,7 @@
-from models.Vehicle import *
-from models.Person import *
-from models.Task import *
-from models.Service import *
+from .models.Vehicle import *
+from .models.Person import *
+from .models.Task import *
+from .models.Service import *
 
 car = Car("car", 1998, "abc", "fiat")
 print(car.model)
