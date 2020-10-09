@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Service:
+class Appointment:
     def __init__(self, date, dateHour, employee, customer, status, description):
         self.date = date
         self.dateHour = dateHour
