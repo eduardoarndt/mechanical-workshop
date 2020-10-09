@@ -7,8 +7,9 @@ class _Person:
 
 
 class Employee(_Person):
-    def __init__(self, name, cpf, number, mail):
+    def __init__(self, name, cpf, number, mail, identifier):
         super().__init__(name, cpf, number, mail)
+        self.id = identifier
 
 
 class Customer(_Person):
