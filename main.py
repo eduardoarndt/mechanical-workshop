@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 from DataBase import DataBase
 from models.Person import *
+from ScheduleList import *
 
 repository = DataBase()
+scheduleList = SchedulesList()
+ids = 0
 
 
 def menuEmployee():
@@ -25,35 +28,68 @@ def menuCustomer():
 
 
 def registerCustomer():
-    newCustomer = Customer('', '', 0, '', '', '', '', '', True)
-    newCustomer.name = input('Enter customer''s name: ')
-    newCustomer.cpf = input('Enter customer''s CPF: ')
-    newCustomer.number = int(input('Enter customer''s number: '))
-    newCustomer.address = input('Enter customer''s address: ')
-    newCustomer.birthDate = input('Enter customer''s birthDate: ')
-    newCustomer.gender = input('Enter customer''s gender: ')
-    newCustomer.civilState = input('Enter customer''s civilState: ')
+    customerName = input('Enter customer''s name: ')
+    customerCpf = input('Enter customer''s CPF: ')
+    customerNumber = input('Enter customer''s number: ')
+    customerMail = input('Enter customer''s e-mail: ')
+    customerAddress = input('Enter customer''s address: ')
+    customerBirthDate = input('Enter customer''s birthDate: ')
+    customerGender = input('Enter customer''s gender: ')
+    customerCivilState = input('Enter customer''s civilState: ')
+
+    newCustomer = Customer(customerName, customerCpf, customerNumber, customerMail, customerAddress, customerBirthDate,
+                           customerGender, customerCivilState, True)
 
     repository.customers.append(newCustomer)
 
 
 def registerEmployee():
-    newEmployee = Employee('', '', 0, '')
-    newEmployee.name = input('Enter customer''s name: ')
-    newEmployee.cpf = input('Enter customer''s CPF: ')
-    newEmployee.number = int(input('Enter customer''s number: '))
-    newEmployee.mail = input('Enter customer''s email: ')
+    employeeName = input('Enter employee''s name: ')
+    employeeCpf = input('Enter employee''s CPF: ')
+    employeeNumber = input('Enter employee''s number: ')
+    employeeEmail = input('Enter employee''s email: ')
 
+    repository.idCounter += 1
+    newEmployee = Employee(employeeName, employeeCpf, employeeNumber, employeeEmail, repository.idCounter)
     repository.employees.append(newEmployee)
+
+
+def menuAppointments():
+    option = int(input("Type the desired operation\n"
+                       "1.Register appointment\n"
+                       "2.List\n"))
+
+    if (option == 1):
+        print("haujhsuahsuahsuahusahushausa")
+        # entrar com a data
+
+        retrieveEmployeeFreeSchedule()
+        # percorrer os serviços que tem data = a que foi informada
+        # vou anotar qual funcionário é e qual horário é
+
+        # para cada funcionario
+        # começa as 8h... quando chegar no horário de um serviço marcadp que eu tenho na lista, não printa
+        # e segue
+
+
+def retrieveEmployeeFreeSchedule():
+    print("Free schedules per employee")
+    repository.freeSchedules()
 
 
 keep = True
 while keep:
-    option = int(input("'\nSelect the menu\n1.Customer\n2.Employee\n3.Quit\n"))
+    option = int(input("'\nSelect the menu\n"
+                       "1.Customer Management\n"
+                       "2.Employee Management\n"
+                       "3.Appointments Management\n"
+                       "4.Quit\n"))
 
     if option == 1:
         menuCustomer()
     elif option == 2:
         menuEmployee()
     elif option == 3:
+        menuAppointments()
+    elif option == 4:
         keep = False
