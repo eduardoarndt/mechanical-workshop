@@ -2,13 +2,13 @@ from enum import Enum
 
 
 class Appointment:
-    def __init__(self, date, dateHour, employee, customer, status, description):
+    def __init__(self, date, dateHour, employee, customer, status, task):
         self.date = date
         self.dateHour = dateHour
         self.employee = employee
         self.customer = customer
         self.status = status
-        self.description = description
+        self.task = task
 
 
 class Status(Enum):
