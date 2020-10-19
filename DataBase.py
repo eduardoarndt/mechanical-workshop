@@ -3,11 +3,41 @@ from ScheduleList import *
 
 scheduleList = SchedulesList()
 
+
 class DataBase(object):
     customers = []
     employees = []
     appointments = []
     idCounter = 0
+
+    def deleteAppointment(self, customerCpf, date, hour):
+        newAppointmentLister = []
+
+        for appointment in self.appointments:
+            if (customerCpf == appointment.customer.cpf) \
+                    and (date == appointment.date) \
+                    and (hour == appointment.dateHour):
+                print("Deleting appointment corresponding to CPF " + customerCpf + " date " + date + " hour " +
+                      str(hour))
+            else:
+                newAppointmentLister.append(appointment)
+
+        self.appointments = newAppointmentLister
+
+    def findAppointment(self, customerCpf, date, hour):
+        actualAppointment = None
+        found = False
+
+        for appointment in self.appointments:
+            if (customerCpf == appointment.customer.cpf) \
+                    and (date == appointment.date) \
+                    and (hour == appointment.dateHour):
+                found = True
+                actualAppointment = appointment
+        if not found:
+            print("Appointment not found")
+
+        return actualAppointment
 
     def findEmployee(self, employeeId):
         for employee in self.employees:
@@ -16,12 +46,44 @@ class DataBase(object):
             else:
                 print("Employee not found!")
 
+    def findEmployee(self, employeeCpf):
+        for employee in self.employees:
+            if employee.cpf == employeeCpf:
+                return employee
+            else:
+                print("Employee not found!")
+
+    def deleteEmployee(self, employeeCpf):
+        newEmployeeList = []
+
+        for employee in self.employees:
+            if employee.cpf == employeeCpf:
+                print("Deleting employee corresponding to CPF " + employee.cpf)
+            else:
+                newEmployeeList.append(employee)
+
+        self.employees = newEmployeeList
+
     def findCustomer(self, customerCpf):
         for customer in self.customers:
             if customer.cpf == customerCpf:
                 return customer
             else:
                 print("Customer not found!")
+
+    def registerCustomer(self, customer):
+        self.customers.append(customer)
+
+    def deleteCustomer(self, customerCpf):
+        newCustomerLister = []
+
+        for customer in self.customers:
+            if customer.cpf == customerCpf:
+                print("Deleting customer corresponding to CPF " + customerCpf)
+            else:
+                newCustomerLister.append(customer)
+
+        self.customers = newCustomerLister
 
     def listCustomers(self, printOnlyActives):
         printer = Printer()
@@ -47,7 +109,6 @@ class DataBase(object):
                       printer.formatValue(6, customer.gender) +
                       printer.formatValue(7, customer.civilState))
 
-
     def listAppoitmentsByDate(self, date):
 
         printer = Printer()
@@ -61,17 +122,17 @@ class DataBase(object):
         printer.addPrintingObject("Hour", True, 4)
         printer.addPrintingObject("Employee's name", True, 25)
         printer.addPrintingObject("Customers's name", True, 25)
-        printer.addPrintingObject("Status", True, 25)        
+        printer.addPrintingObject("Status", True, 25)
         printer.addPrintingObject("Task", True, 25)
         printer.printHeader()
 
         for appointment in appointmentListForThatDay:
-                print(printer.formatValue(0, appointment.date) +
-                      printer.formatValue(1, appointment.dateHour) +
-                      printer.formatValue(2, appointment.employee.name) +
-                      printer.formatValue(3, appointment.customer.name) +
-                      printer.formatValue(4, appointment.status) +
-                      printer.formatValue(5, appointment.task.name))  
+            print(printer.formatValue(0, appointment.date) +
+                  printer.formatValue(1, appointment.dateHour) +
+                  printer.formatValue(2, appointment.employee.name) +
+                  printer.formatValue(3, appointment.customer.name) +
+                  printer.formatValue(4, appointment.status) +
+                  printer.formatValue(5, appointment.task.name))
 
     def listEmployees(self):
         printer = Printer()
@@ -102,7 +163,6 @@ class DataBase(object):
             if appointment.date == dateOfService:
                 appointmentListForThatDay.append(appointment)
 
-
         freeScheduleOption = 0
         freeSchedulesList = []
         for employee in self.employees:
@@ -112,8 +172,8 @@ class DataBase(object):
                 for appointment in appointmentListForThatDay:
                     if appointment.employee.id == employee.id \
                             and (appointment.dateHour == hour \
-                            or appointment.dateHour + 1 == hour \
-                            or appointment.dateHour - 1 == hour):
+                                 or appointment.dateHour + 1 == hour \
+                                 or appointment.dateHour - 1 == hour):
                         foundFreeHour = False
 
                 if foundFreeHour:
@@ -128,6 +188,7 @@ class DataBase(object):
                   printer.formatValue(4, x.hour))
 
         return freeSchedulesList
+
 
 class DataToMarkAppoint:
     freeScheduleOption = None
