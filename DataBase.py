@@ -3,7 +3,6 @@ from ScheduleList import *
 
 scheduleList = SchedulesList()
 
-
 class DataBase(object):
     customers = []
     employees = []
@@ -48,6 +47,32 @@ class DataBase(object):
                       printer.formatValue(6, customer.gender) +
                       printer.formatValue(7, customer.civilState))
 
+
+    def listAppoitmentsByDate(self, date):
+
+        printer = Printer()
+
+        appointmentListForThatDay = []
+        for appointment in self.appointments:
+            if appointment.date == date:
+                appointmentListForThatDay.append(appointment)
+
+        printer.addPrintingObject("Date", True, 10)
+        printer.addPrintingObject("Hour", True, 4)
+        printer.addPrintingObject("Employee's name", True, 25)
+        printer.addPrintingObject("Customers's name", True, 25)
+        printer.addPrintingObject("Status", True, 25)        
+        printer.addPrintingObject("Task", True, 25)
+        printer.printHeader()
+
+        for appointment in appointmentListForThatDay:
+                print(printer.formatValue(0, appointment.date) +
+                      printer.formatValue(1, appointment.dateHour) +
+                      printer.formatValue(2, appointment.employee.name) +
+                      printer.formatValue(3, appointment.customer.name) +
+                      printer.formatValue(4, appointment.status) +
+                      printer.formatValue(5, appointment.task.name))  
+
     def listEmployees(self):
         printer = Printer()
 
@@ -77,6 +102,7 @@ class DataBase(object):
             if appointment.date == dateOfService:
                 appointmentListForThatDay.append(appointment)
 
+
         freeScheduleOption = 0
         freeSchedulesList = []
         for employee in self.employees:
@@ -84,9 +110,10 @@ class DataBase(object):
 
                 foundFreeHour = True
                 for appointment in appointmentListForThatDay:
-                    if appointment.employee == employee \
-                            and appointment.dateHour == hour \
-                            and appointment.dateHour + 1 == hour:
+                    if appointment.employee.id == employee.id \
+                            and (appointment.dateHour == hour \
+                            or appointment.dateHour + 1 == hour \
+                            or appointment.dateHour - 1 == hour):
                         foundFreeHour = False
 
                 if foundFreeHour:
@@ -115,8 +142,3 @@ class DataToMarkAppoint:
         self.employeeName = employeeName
         self.dateOfService = dateOfService
         self.hour = hour
-
-
-
-
-
