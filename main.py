@@ -12,11 +12,15 @@ clear = lambda: os.system('cls')
 keep = True
 while keep:
     clear()
-    option = int(input("\nSelect the menu\n"
-                       "1.Customer Management\n"
-                       "2.Employee Management\n"
-                       "3.Appointments Management\n"
-                       "4.Quit\n"))
+    try:
+        option = int(input("\nSelect the menu\n"
+                        "1.Customer Management\n"
+                        "2.Employee Management\n"
+                        "3.Appointments Management\n"
+                        "4.Quit\n"))
+    except: 
+        print("Please enter a valid option!!!")
+        option = None
 
     if option == 1:
         menu = MenuCustomer(repository)
@@ -29,3 +33,5 @@ while keep:
         menu.mainMenu()
     elif option == 4:
         keep = False
+    else:
+        print("Please enter a valid option!!!")
