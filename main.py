@@ -6,7 +6,7 @@ from menuEmployee import MenuEmployee
 import os
 
 repository = DataBase()
-clear = lambda: os.system('cls')
+clear = lambda: os.system('clear')
 
                 
 keep = True
@@ -33,5 +33,3 @@ while keep:
             print("Please enter a valid option!!!")
     except: 
         print("Please enter a valid option!!!")
-
-    
