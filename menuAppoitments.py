@@ -2,7 +2,6 @@ from ScheduleList import SchedulesList
 from models.Appointment import Appointment, Status
 from models.Task import Task, AvailableTask
 from Printer import Printer
-
 from menuCustomer import MenuCustomer
 
 

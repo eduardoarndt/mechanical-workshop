@@ -1,8 +1,6 @@
 from models.Person import Employee
 
 
-
-
 class MenuEmployee:
     def __init__(self, repository):
         self.repository = repository
