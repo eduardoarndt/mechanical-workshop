@@ -9,8 +9,8 @@ class MenuEmployee:
     def mainMenu(self):
         option = int(input("\nType the desired operation"
                            "\n1.Register employee"
-                           "\n2.Update employee information"
-                           "\n3.Delete employee (DEMITIR kk)"
+                           "\n2.Update"
+                           "\n3.Delete"
                            "\n4.List\n"))
 
         if option == 1:

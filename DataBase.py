@@ -39,7 +39,7 @@ class DataBase(object):
 
         return actualAppointment
 
-    def findEmployee(self, employeeId):
+    def findEmployeeById(self, employeeId):
         for employee in self.employees:
             if employee.id == employeeId:
                 return employee
