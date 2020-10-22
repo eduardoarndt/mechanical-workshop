@@ -154,7 +154,7 @@ class MenuAppoitments:
         vehicle = self.repository.findVehicleByCustomerCpf(customer.cpf)
 
         if vehicle == None:
-            print("Vehicle not found for this customer, you will now be prompted to register a vehicle for this customer")
+            print("No vehicle found for this customer, you will now be prompted to register a vehicle for this customer")
             menuCustomer = MenuCustomer(self.repository)
             vehicle = menuCustomer.registerVehicleForCustomer(customer)
 
