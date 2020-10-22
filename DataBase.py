@@ -8,6 +8,7 @@ class DataBase(object):
     customers = []
     employees = []
     appointments = []
+    vehicles = []
     idCounter = 0
 
     def deleteAppointment(self, customerCpf, date, hour):
@@ -86,6 +87,17 @@ class DataBase(object):
 
         self.customers = newCustomerLister
 
+    def registerVehicle(self, vehicle):
+        self.vehicles.append(vehicle)
+
+    def findVehicleByCustomerCpf(self, customerCpf):
+        for vehicle in self.vehicles:
+            if vehicles.owner.cpf == customerCpf:
+                return vehicle
+            else:
+                print("Vehicle not found!")
+                return None
+
     def listCustomers(self, printOnlyActives):
         printer = Printer()
 
@@ -123,6 +135,7 @@ class DataBase(object):
         printer.addPrintingObject("Hour", True, 4)
         printer.addPrintingObject("Employee's name", True, 25)
         printer.addPrintingObject("Customers's name", True, 25)
+        printer.addPrintingObject("Vehicle's model", True, 25)
         printer.addPrintingObject("Status", True, 25)
         printer.addPrintingObject("Task", True, 25)
         printer.printHeader()
@@ -132,8 +145,9 @@ class DataBase(object):
                   printer.formatValue(1, appointment.dateHour) +
                   printer.formatValue(2, appointment.employee.name) +
                   printer.formatValue(3, appointment.customer.name) +
-                  printer.formatValue(4, appointment.status) +
-                  printer.formatValue(5, appointment.task.name))
+                  printer.formatValue(4, appointment.vehicle.model) +
+                  printer.formatValue(5, appointment.status) +
+                  printer.formatValue(6, appointment.task.name))
 
     def listEmployees(self):
         printer = Printer()

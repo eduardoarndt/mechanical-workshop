@@ -1,8 +1,9 @@
 from models.Person import Employee
 
 
-class MenuEmployee:
 
+
+class MenuEmployee:
     def __init__(self, repository):
         self.repository = repository
 
@@ -16,9 +17,9 @@ class MenuEmployee:
 
             if option == 1:
                 self.registerEmployee()
-            if option == 2:
+            elif option == 2:
                 self.updateEmployee()
-            if option == 3:
+            elif option == 3:
                 self.deleteEmployee()
             elif option == 4:
                 self.repository.listEmployees()
@@ -26,7 +27,7 @@ class MenuEmployee:
             else:
                 print("Please enter a valid option! Returning to main menu!")
         except:
-            print("Please enter a valid option! Returning to main menu!")
+            print("Please enter a valid option! Returning to main menu! **Exception")
 
     def registerEmployee(self):
         print("Registering employee...")

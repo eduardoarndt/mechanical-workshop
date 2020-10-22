@@ -1,4 +1,5 @@
 from models.Person import Customer
+from models.Vehicle import *
 import logging
 
 
@@ -9,10 +10,10 @@ class MenuCustomer:
     def mainMenu(self):
         try:
             option = int(input("\nType the desired operation"
-                            "\n1.Register"
-                            "\n2.Update"
-                            "\n3.Delete"
-                            "\n4.List\n"))
+                            "\n1.Register customer"
+                            "\n2.Update customer"
+                            "\n3.Delete customer"
+                            "\n4.List customers\n"))
 
             if option == 1:
                 self.registerCustomer()
@@ -28,7 +29,7 @@ class MenuCustomer:
             else:
                 print("Please enter a valid option! Returning to main menu!")
         except:
-            print("Please enter a valid option! Returning to main menu!")
+            print("Please enter a valid option! Returning to main menu! **Exception")
 
     def registerCustomer(self):
         print("Registering customer...")
@@ -45,6 +46,13 @@ class MenuCustomer:
                                customerBirthDate, customerGender, customerCivilState, True)
 
         self.repository.registerCustomer(newCustomer)
+
+        shouldRegisterVehicle = int(input("Want to register a vehicle for this customer?\n1. Yes\n2. No\n")) == 1
+
+        if shouldRegisterVehicle:
+            self.registerVehicleForCustomer(newCustomer)
+
+        return newCustomer
 
     def updateCustomer(self):
         print("Updating customer...")
@@ -90,6 +98,27 @@ class MenuCustomer:
             isActive = int(input('Enter if customer is active: 1 for active, 2 for inactive: ')) == 1
             customer.isCustomerActive = isActive
         except:
-                print("Invalid parameter... will leave customer as is")
+            print("Invalid parameter... will leave customer as is")
 
         print("Customer information updated!")
+
+    def registerVehicleForCustomer(self, customer):
+        vehicleType = int(input("What type of vehicle?\n1. Car\n2. Motorcycle\n"))
+        vehiclemanufacturer = input("Enter vehicle manufacturer: ")
+        vehiclemodel = input("Enter vehicle model: ")
+        vehicleyear = input("Enter vehicle year: ")
+        vehicleplate = input("Enter vehicle plate: ")
+
+        if vehicleType == 1:
+            car = Car(vehiclemodel, vehicleyear, vehicleplate, vehiclemanufacturer, customer)
+            self.repository.registerVehicle(car)
+            print("car registered!")
+            return car
+        elif vehicleType == 2:
+            motorcycle = Motorcycle(vehiclemodel, vehicleyear, vehicleplate, vehiclemanufacturer, customer)
+            self.repository.registerVehicle(motorcycle)
+            print("motorcycle registered!")
+            return motorcycle
+        else:
+            print("No valid option provided, returning to menu!")
+            return None

@@ -51,7 +51,7 @@ class MenuAppoitments:
             else:
                 print("Please enter a valid option! Returning to main menu!")
         except:
-            print("Please enter a valid option! Returning to main menu!")
+            print("Please enter a valid option! Returning to main menu! **Exception")
 
     def deleteAppointment(self):
         print("Enter appointment information")
@@ -87,6 +87,7 @@ class MenuAppoitments:
         printer.addPrintingObject("Hour", True, 4)
         printer.addPrintingObject("Employee's name", True, 25)
         printer.addPrintingObject("Customers's name", True, 25)
+        printer.addPrintingObject("Vehicle's model", True, 25)
         printer.addPrintingObject("Status", True, 25)        
         printer.addPrintingObject("Task", True, 25)
         printer.printHeader()
@@ -96,9 +97,9 @@ class MenuAppoitments:
                       printer.formatValue(1, appointment.dateHour) +
                       printer.formatValue(2, appointment.employee.name) +
                       printer.formatValue(3, appointment.customer.name) +
-                      printer.formatValue(4, appointment.status) +
-                      printer.formatValue(5, appointment.task.name))  
-
+                      printer.formatValue(4, appointment.vehicle.model) +
+                      printer.formatValue(5, appointment.status) +
+                      printer.formatValue(6, appointment.task.name))  
         ##mover esse c�digo para a classe DataBase
 
     def menuLists(self):
@@ -118,21 +119,19 @@ class MenuAppoitments:
             print("Customer not registered")
             if registerNewCustomer == True:
                 menuCustomer = MenuCustomer(self.repository)
-                menuCustomer.registerCustomer()
+                customer = menuCustomer.registerCustomer()
             else: 
                 return
 
-        customer = self.repository.findCustomer(customersCPF)
         return customer
 
 
     def askTaskInfo(self):
         availableTasks = AvailableTask()
-    # colocar avaible tasks no database
         availableTasks.getAllAvailableTasks()
 
+        print("Select task to be executed: ")
         printer = Printer()
-
         printer.addPrintingObject("ID", True, 3)
         printer.addPrintingObject("Name", True, 30)
         printer.addPrintingObject("Description", True, 30)
@@ -153,6 +152,13 @@ class MenuAppoitments:
         dateOfService = input("Which date to register appointment? Please, type in format dd/mm/yyyy\n")    
         
         customer = self.askCustomerInfo(True)
+        vehicle = self.repository.findVehicleByCustomerCpf(customer.cpf)
+
+        if vehicle == None:
+            print("Vehicle not found for this customer, you will now be prompted to register a vehicle for this customer")
+            menuCustomer = MenuCustomer(self.repository)
+            vehicle = menuCustomer.registerVehicleForCustomer(customer)
+
         selectedTask = self.askTaskInfo()    
 
         print("Free schedules per employee")
@@ -166,6 +172,7 @@ class MenuAppoitments:
                                                         self.repository.findEmployeeById(
                                                             options.employeeId),
                                                         customer,
+                                                        vehicle,
                                                         Status.SCHEDULED,
                                                         selectedTask
                                                         )
