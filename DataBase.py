@@ -70,6 +70,7 @@ class DataBase(object):
                 return customer
             else:
                 print("Customer not found!")
+                return None
 
     def registerCustomer(self, customer):
         self.customers.append(customer)

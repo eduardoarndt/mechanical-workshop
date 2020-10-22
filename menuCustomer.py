@@ -52,7 +52,7 @@ class MenuCustomer:
 
         customer = self.repository.findCustomer(customerCpf)
 
-        if customer:
+        if customer is not None:
             print("Please, update the customer information")
             try:
                 self.readDataAndUpdateCustomer(customer)
@@ -60,6 +60,9 @@ class MenuCustomer:
                 print("Error occurred while updating customer...")
                 logging.debug("We may want to review this code to not lose customer data in the future but for now "
                           "it's what we got")
+        else:
+            print("Didn't find customer to update.")
+                    
 
     def deleteCustomer(self):
         customerCpf = input('Enter customer''s CPF: ')
