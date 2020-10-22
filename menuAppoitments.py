@@ -16,20 +16,19 @@ class MenuAppoitments:
         while not found:
             cpf = input("Enter customer CPF: ")
             date = input("Enter appoitment date, in format dd/mm/yyyy: ")
-
             hour = int(input("Enter appoitment hour: "))
+            actualAppointment = None
             
             for appointment in self.repository.appointments:
                 if (cpf == appointment.customer.cpf )\
                         and (date == appointment.date) \
                         and (hour == appointment.dateHour):
                     found = True
-                    actualAppoitment = appointment
+                    actualAppointment = appointment
             if not found:
                 print("Appoitment not found")
                 continue
 
-        if actualAppointment is not None:
             self.repository.appointments.remove(actualAppointment)
             self.doAppointment()
 
