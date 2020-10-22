@@ -50,8 +50,7 @@ class MenuCustomer:
         if customer:
             print("Please, update the customer information")
             try:
-                self.repository.deleteCustomer(customer.cpf)
-                self.registerCustomer()
+                self.readDataAndUpdateCustomer(customer)
             except:
                 print("Error occurred while updating customer...")
                 logging.debug("We may want to review this code to not lose customer data in the future but for now "
@@ -66,3 +65,23 @@ class MenuCustomer:
             self.repository.deleteCustomer(customerCpf)
         else:
             print("Ok, cancelling operation!")
+
+    # this should be in the repository?
+    def readDataAndUpdateCustomer(self, customer):
+        print("Updating customer of name: " + customer.name + ", CPF: " + customer.cpf)
+        customer.name = input('Enter customer''s name: ')
+        customer.cpf = input('Enter customer''s CPF: ')
+        customer.number = input('Enter customer''s number: ')
+        customer.mail = input('Enter customer''s e-mail: ')
+        customer.address = input('Enter customer''s address: ')
+        customer.birthDate = input('Enter customer''s birthDate: ')
+        customer.gender = input('Enter customer''s gender: ')
+        customer.civilState = input('Enter customer''s civilState: ')
+
+        try:
+            isActive = int(input('Enter if customer is active: 1 for active, 2 for inactive: ')) == 1
+            customer.isCustomerActive = isActive
+        except:
+                print("Invalid parameter... will leave customer as is")
+
+        print("Customer information updated!")

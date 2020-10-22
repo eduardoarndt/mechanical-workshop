@@ -146,7 +146,7 @@ class MenuAppoitments:
     def doAppointment(self):
         print("Scheduling a service")
         dateOfService = input("Which date to register appointment? Please, type in format dd/mm/yyyy\n")    
-        print(dateOfService[0:2])
+        
         customer = self.askCustomerInfo(True)
         selectedTask = self.askTaskInfo()    
 
