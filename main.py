@@ -18,20 +18,20 @@ while keep:
                         "2.Employee Management\n"
                         "3.Appointments Management\n"
                         "4.Quit\n"))
+        if option == 1:
+            menu = MenuCustomer(repository)
+            menu.mainMenu()
+        elif option == 2:        
+            menu = MenuEmployee(repository)
+            menu.mainMenu()
+        elif option == 3:        
+            menu = MenuAppoitments(repository)
+            menu.mainMenu()
+        elif option == 4:
+            keep = False
+        else:
+            print("Please enter a valid option!!!")
     except: 
         print("Please enter a valid option!!!")
-        option = None
 
-    if option == 1:
-        menu = MenuCustomer(repository)
-        menu.mainMenu()
-    elif option == 2:        
-        menu = MenuEmployee(repository)
-        menu.mainMenu()
-    elif option == 3:        
-        menu = MenuAppoitments(repository)
-        menu.mainMenu()
-    elif option == 4:
-        keep = False
-    else:
-        print("Please enter a valid option!!!")
+    
