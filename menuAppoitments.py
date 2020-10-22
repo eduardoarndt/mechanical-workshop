@@ -33,20 +33,25 @@ class MenuAppoitments:
             self.doAppointment()
 
     def mainMenu(self):
-        option = int(input("Type the desired operation\n"
-                           "1.Register appointment\n"
-                           "2.Reeschedule\n"
-                           "3.Delete an appoitment\n"
-                           "4.List\n"))
+        try:
+            option = int(input("Type the desired operation\n"
+                                "1.Register appointment\n"
+                                "2.Reeschedule\n"
+                                "3.Delete an appoitment\n"
+                                "4.List\n"))
 
-        if (option == 1):
-            self.doAppointment()   
-        if (option == 2):
-            self.reescheduleAppoitment()
-        if (option == 3):
-            self.deleteAppointment()
-        if (option == 4):
-            self.menuLists()
+            if (option == 1):
+                self.doAppointment()   
+            if (option == 2):
+                self.reescheduleAppoitment()
+            if (option == 3):
+                self.deleteAppointment()
+            if (option == 4):
+                self.menuLists()
+            else:
+                print("Please enter a valid option! Returning to main menu!")
+        except:
+            print("Please enter a valid option! Returning to main menu!")
 
     def deleteAppointment(self):
         print("Enter appointment information")

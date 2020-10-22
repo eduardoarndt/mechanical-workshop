@@ -7,23 +7,28 @@ class MenuCustomer:
         self.repository = repository
 
     def mainMenu(self):
-        option = int(input("\nType the desired operation"
-                           "\n1.Register"
-                           "\n2.Update"
-                           "\n3.Delete"
-                           "\n4.List\n"))
+        try:
+            option = int(input("\nType the desired operation"
+                            "\n1.Register"
+                            "\n2.Update"
+                            "\n3.Delete"
+                            "\n4.List\n"))
 
-        if option == 1:
-            self.registerCustomer()
-        elif option == 2:
-            self.updateCustomer()
-        elif option == 3:
-            self.deleteCustomer()
-        elif option == 4:
-            activeCustomerOption = int(
-                input("Which customers to list?\n1.Actives\n2.Inactives\n"))
-            self.repository.listCustomers(activeCustomerOption == 1)
-            input("")
+            if option == 1:
+                self.registerCustomer()
+            elif option == 2:
+                self.updateCustomer()
+            elif option == 3:
+                self.deleteCustomer()
+            elif option == 4:
+                activeCustomerOption = int(
+                    input("Which customers to list?\n1.Actives\n2.Inactives\n"))
+                self.repository.listCustomers(activeCustomerOption == 1)
+                input("")
+            else:
+                print("Please enter a valid option! Returning to main menu!")
+        except:
+            print("Please enter a valid option! Returning to main menu!")
 
     def registerCustomer(self):
         print("Registering customer...")

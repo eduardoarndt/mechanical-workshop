@@ -7,21 +7,26 @@ class MenuEmployee:
         self.repository = repository
 
     def mainMenu(self):
-        option = int(input("\nType the desired operation"
-                           "\n1.Register employee"
-                           "\n2.Update"
-                           "\n3.Delete"
-                           "\n4.List\n"))
+        try:
+            option = int(input("\nType the desired operation"
+                            "\n1.Register employee"
+                            "\n2.Update"
+                            "\n3.Delete"
+                            "\n4.List\n"))
 
-        if option == 1:
-            self.registerEmployee()
-        if option == 2:
-            self.updateEmployee()
-        if option == 3:
-            self.deleteEmployee()
-        elif option == 4:
-            self.repository.listEmployees()
-            input("")
+            if option == 1:
+                self.registerEmployee()
+            if option == 2:
+                self.updateEmployee()
+            if option == 3:
+                self.deleteEmployee()
+            elif option == 4:
+                self.repository.listEmployees()
+                input("")
+            else:
+                print("Please enter a valid option! Returning to main menu!")
+        except:
+            print("Please enter a valid option! Returning to main menu!")
 
     def registerEmployee(self):
         print("Registering employee...")
