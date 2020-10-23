@@ -1,35 +1,5 @@
 #!/usr/bin/env python3
-from DataBase import DataBase
-from menuAppoitments import MenuAppoitments
-from menuCustomer import MenuCustomer
-from menuEmployee import MenuEmployee
-import os
+from menuGeral import Menu
 
-repository = DataBase()
-clear = lambda: os.system('clear')
-
-                
-keep = True
-while keep:
-    clear()
-    try:
-        option = int(input("\nSelect the menu\n"
-                        "1.Customer Management\n"
-                        "2.Employee Management\n"
-                        "3.Appointments Management\n"
-                        "4.Quit\n"))
-        if option == 1:
-            menu = MenuCustomer(repository)
-            menu.mainMenu()
-        elif option == 2:        
-            menu = MenuEmployee(repository)
-            menu.mainMenu()
-        elif option == 3:        
-            menu = MenuAppoitments(repository)
-            menu.mainMenu()
-        elif option == 4:
-            keep = False
-        else:
-            print("Please enter a valid option!!!")
-    except: 
-        print("Please enter a valid option!!!")
+menu = Menu()
+menu.main()
